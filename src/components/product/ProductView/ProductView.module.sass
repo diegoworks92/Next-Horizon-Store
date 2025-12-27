@@ -1,3 +1,4 @@
+@use "../../../sass/variables"
 
 .ProductView
     max-width: 1200px
@@ -9,7 +10,7 @@
 
     @media (max-width: 1280px)
         grid-template-columns: 1fr
-        grid-template-rows: auto auto // Asegura que los elementos se apilen verticalmente
+        grid-template-rows: auto auto
         text-align: center
 
     &__images
@@ -37,24 +38,27 @@
             font-size: 1.125rem
             line-height: 1.5
             letter-spacing: 0.5px
-            border: 2px solid $main-contrast
-            color: $text-color
-            text-shadow: 0 0 7px $main-contrast, 0 0 10px $main-contrast,0 0 21px $main-contrast
+            border: 2px solid variables.$main-contrast
+            color: variables.$text-color
+            text-shadow: 0 0 7px variables.$main-contrast, 0 0 10px variables.$main-contrast, 0 0 21px variables.$main-contrast
             padding: 0.5rem 1rem
             border-radius: 1rem
             margin-top: 1rem
             margin-bottom: 0px
+
         &__title
             font-size: 2rem
             font-weight: 700
             margin-top: 0
             margin-bottom: 0.5rem
+
         &__description
             font-size: 1.125rem
             line-height: 1.5
             letter-spacing: 0.5px
             margin: 1rem 0px
+
         &__price
-            color: $color-secondary
+            color: variables.$color-secondary
             font-size: 2.125rem
             font-weight: 700

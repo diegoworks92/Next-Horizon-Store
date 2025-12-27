@@ -1,3 +1,5 @@
+@use "../../../sass/variables"
+
 @font-face
     font-family: 'Blanka'
     src: url('/fonts/Blanka.otf') format('opentype')
@@ -10,11 +12,10 @@
     align-items: center
     text-align: center
     padding: 3rem 2rem
-    border-top: 1px solid $magenta-color
-    margin-top: 10rem
     font-family: 'Blanka', sans-serif
     border-top: 1px solid transparent
     position: relative
+    margin-top: 10rem
 
     &::before
         content: ''
@@ -23,8 +24,8 @@
         left: 0
         right: 0
         height: 1px
-        background: $magenta-color
-        box-shadow: 0 0 5px $magenta-color, 0 0 10px $magenta-color, 0 0 20px $magenta-color, 0 0 40px $magenta-color
+        background: variables.$magenta-color
+        box-shadow: 0 0 5px variables.$magenta-color, 0 0 10px variables.$magenta-color, 0 0 20px variables.$magenta-color, 0 0 40px variables.$magenta-color
 
 .noUnderline
     text-decoration: none
@@ -36,7 +37,7 @@
 
     &:hover
         text-decoration: none
-        color: $hover-color
+        color: variables.$hover-color
 
     &:active
         text-decoration: none

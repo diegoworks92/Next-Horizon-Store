@@ -1,3 +1,5 @@
+@use "../../../sass/variables"
+
 .Header
   display: flex
   flex-flow: row nowrap
@@ -20,14 +22,14 @@
       margin-right: 0
 
     & > li > a
-      color: $text-color
+      color: variables.$text-color
       text-decoration: none
       font-size: 1.2rem
       font-weight: 400
       margin-right: 1rem
 
       &:hover
-        color: $hover-color
+        color: variables.$hover-color
 
   &__user
     margin-left: auto
@@ -37,7 +39,7 @@
     column-gap: 1rem
 
     & > a
-      color: $text-color
+      color: variables.$text-color
       text-decoration: none
       font-size: 1.2rem
       font-weight: 400
@@ -46,7 +48,7 @@
       cursor: pointer
 
       &:hover
-        color: $hover-color
+        color: variables.$hover-color
 
 @media (max-width: 600px)
   .Header__list

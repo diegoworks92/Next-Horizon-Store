@@ -1,8 +1,11 @@
+@use "../../sass/variables" as variables
+
 @font-face
     font-family: 'Blanka'
     src: url('/fonts/Blanka.otf') format('opentype')
     font-weight: normal
     font-style: normal
+
 .StoreLayout
     display: flex
     flex-direction: column
@@ -28,11 +31,11 @@
         margin-bottom: 2rem !important
 
     &__chip
-        background: linear-gradient(109.6deg, $magenta-color 11.2%, $purple-color 91.1%)
+        background: linear-gradient(109.6deg, variables.$magenta-color 11.2%, variables.$purple-color 91.1%)
         border-radius: 3rem
         padding: 0.5rem 1rem
         text-decoration: none
-        color: white
+        color: variables.$text-color
         font-weight: bold
         white-space: nowrap
 

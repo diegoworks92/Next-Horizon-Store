@@ -4,14 +4,15 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import('next').NextConfig} */
 
-// Get the directory name of the current module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const nextConfig = {
+  turbopack: {
+    root: __dirname,
+  },
   sassOptions: {
     includePaths: [join(__dirname, "src/sass")],
-    prependData: `@import "main.sass"`,
   },
   images: {
     remotePatterns: [
@@ -20,6 +21,8 @@ const nextConfig = {
         protocol: "https",
       },
     ],
+
+    qualities: [75, 80],
   },
 };
 

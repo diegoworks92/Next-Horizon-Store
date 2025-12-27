@@ -1,3 +1,5 @@
+@use "../../../sass/variables"
+
 @font-face
     font-family: 'Blanka'
     src: url('/fonts/Blanka.otf') format('opentype')
@@ -37,6 +39,7 @@
             text-align: right
     &__title
         font-family: 'Blanka', sans-serif
+
 .MainProducts__imageWrapper
     width: 320px
     height: 320px
@@ -45,7 +48,7 @@
     transition: box-shadow 0.5s ease-in-out // Transición para el borde difuminado
 
     &:hover
-        box-shadow: 0 0 15px $purple-color // Borde difuminado al pasar el ratón
+        box-shadow: 0 0 15px variables.$purple-color // Borde difuminado al pasar el ratón
 
         .MainProducts__image
             transform: scale(1.1) // Efecto de acercamiento sin cambiar el tamaño del contenedor

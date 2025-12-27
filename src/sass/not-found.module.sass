@@ -1,3 +1,5 @@
+@use "variables"
+
 @font-face
     font-family: 'Blanka'
     src: url('/fonts/Blanka.otf') format('opentype')
@@ -9,14 +11,16 @@
     flex-direction: column
     align-items: center
     justify-content: center
+
     &__title
         font-size: 10rem
         font-weight: 900
         margin: 0
-        background-image: linear-gradient(270deg, $purple-color, $magenta-color)
+        background-image: linear-gradient(270deg, variables.$purple-color, variables.$magenta-color)
         background-clip: text
         -webkit-text-fill-color: transparent
         font-family: 'Blanka', sans-serif
+
     &__subtitle
         font-size: 2rem
         margin: 0
@@ -26,6 +30,7 @@
 
     &__message
         font-size: 1.5rem
+
     &__link
         display: block
         width: fit-content
@@ -35,7 +40,7 @@
         padding: 0.5rem 1rem
         border: none
         border-radius: 0.5rem
-        background: linear-gradient(270deg, $purple-color, $magenta-color)
+        background: linear-gradient(270deg, variables.$purple-color, variables.$magenta-color)
         font-size: 1.2rem
         cursor: pointer
         color: white

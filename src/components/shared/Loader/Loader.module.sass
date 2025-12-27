@@ -1,3 +1,5 @@
+@use "../../../sass/variables"
+
 .LoaderWrapper
     display: flex
     justify-content: center
@@ -15,7 +17,7 @@
     width: 16px
     height: 16px
     border-radius: 50%
-    background: #fff
+    background: variables.$text-color
     animation: loading 1.2s linear infinite
 
 .Loader div:nth-child(1)
