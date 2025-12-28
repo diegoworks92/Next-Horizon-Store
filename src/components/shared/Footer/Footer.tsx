@@ -11,7 +11,6 @@ export const Footer = () => {
       >
         DiegoWorks.com
       </a>
-      {/*    <p>{new Date().getFullYear()}</p> */}
     </footer>
   );
 };

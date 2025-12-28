@@ -7,7 +7,7 @@ export default function LogoutButton() {
     try {
       const response = await fetch("/api/logout", { method: "POST" });
       if (response.ok) {
-        // Redirigir al usuario a la página de inicio
+        // redirigir al user a la página de inicio
         window.location.href = "/";
       } else {
         console.error("Error logging out");

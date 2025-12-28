@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 
 export const validateAccessToken = async () => {
   try {
-    // Agregamos 'await' porque cookies() devuelve una Promise
     const cookieStore = await cookies();
     const accessTokenCookie = cookieStore.get("accessToken");
     const accessToken = accessTokenCookie?.value || "";

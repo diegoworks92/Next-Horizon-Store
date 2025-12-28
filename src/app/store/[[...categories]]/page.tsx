@@ -6,22 +6,25 @@ import {
 } from "../../../services/shopify/collections";
 
 interface CategoryProps {
-  params: {
-    categories: string[];
-  };
-  searchParams?: string;
+  params: Promise<{
+    categories?: string[];
+  }>;
 }
 
-export default async function Category(props: CategoryProps) {
-  const { categories } = props.params;
+export default async function Category({ params }: CategoryProps) {
+  const { categories } = await params;
+
   let products = [];
   const collections = await getCollections();
 
-  if (categories?.length > 0) {
-    const selectedCollectionId = collections.find(
+  if (categories && categories.length > 0) {
+    const selectedCollection = collections.find(
       (collection: any) => collection.handle === categories[0]
-    ).id;
-    products = await getCollectionProducts(selectedCollectionId);
+    );
+
+    if (selectedCollection) {
+      products = await getCollectionProducts(selectedCollection.id);
+    }
   } else {
     products = await getProducts();
   }

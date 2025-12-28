@@ -11,15 +11,16 @@ interface Message {
 export const Chat = (props: { agent: string }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
-    { id: "1", role: "system", content: props.agent },
+    { id: crypto.randomUUID(), role: "system", content: props.agent },
   ]);
   const [answer, setAnswer] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const newMessages: Message[] = [
       ...messages,
-      { id: Date.now().toString(), role: "user", content: input },
+      { id: crypto.randomUUID(), role: "user", content: input },
     ];
     setMessages(newMessages);
 
@@ -30,10 +31,11 @@ export const Chat = (props: { agent: string }) => {
     });
 
     const data = await res.json();
+
     setAnswer(data.answer);
     setMessages([
       ...newMessages,
-      { id: Date.now().toString(), role: "assistant", content: data.answer },
+      { id: crypto.randomUUID(), role: "assistant", content: data.answer },
     ]);
     setInput("");
   };

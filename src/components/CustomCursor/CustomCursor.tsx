@@ -9,14 +9,17 @@ interface Position {
 }
 
 const CustomCursor: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState<boolean>(false);
-  const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
-  const followerRef = useRef<HTMLDivElement>(null);
+  const [isPointer, setIsPointer] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  const smallCursorRef = useRef<HTMLDivElement>(null);
+  const largeCursorRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>();
   const lastPosition = useRef<Position>({ x: 0, y: 0 });
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handleMouseMove = useCallback((e: MouseEvent) => {
     const target = e.target as HTMLElement;
     if (target instanceof Element) {
       setIsPointer(
@@ -24,50 +27,52 @@ const CustomCursor: React.FC = () => {
       );
     }
     setPosition({ x: e.clientX, y: e.clientY });
-  };
+  }, []);
 
   const animateFollower = useCallback(() => {
-    if (followerRef.current) {
-      const follower = followerRef.current;
+    if (largeCursorRef.current) {
       const dx = position.x - lastPosition.current.x;
       const dy = position.y - lastPosition.current.y;
       lastPosition.current.x += dx * 0.2;
       lastPosition.current.y += dy * 0.2;
-      follower.style.left = `${lastPosition.current.x}px`;
-      follower.style.top = `${lastPosition.current.y}px`;
+      largeCursorRef.current.style.left = `${lastPosition.current.x}px`;
+      largeCursorRef.current.style.top = `${lastPosition.current.y}px`;
     }
-    requestRef.current = requestAnimationFrame(animateFollower);
-  }, [position]);
+    if (!isTouchDevice)
+      requestRef.current = requestAnimationFrame(animateFollower);
+  }, [position, isTouchDevice]);
 
   useEffect(() => {
-    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    setIsTouchDevice(isTouch);
+    setMounted(true);
 
-    if (!isTouch) {
+    const checkTouchDevice = () => {
+      const touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      setIsTouchDevice(touch);
+    };
+
+    checkTouchDevice();
+    window.addEventListener("resize", checkTouchDevice);
+
+    if (!isTouchDevice) {
       window.addEventListener("mousemove", handleMouseMove);
       requestRef.current = requestAnimationFrame(animateFollower);
     }
 
     return () => {
-      if (!isTouch) {
-        window.removeEventListener("mousemove", handleMouseMove);
-        if (requestRef.current) {
-          cancelAnimationFrame(requestRef.current);
-        }
-      }
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", checkTouchDevice);
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [animateFollower]);
+  }, [handleMouseMove, animateFollower, isTouchDevice]);
 
-  if (isTouchDevice) {
-    return null;
-  }
+  if (!mounted || isTouchDevice) return null;
 
   const cursorStyle = isPointer ? { opacity: 0.5 } : {};
 
   return (
     <>
       <div
-        ref={followerRef}
+        ref={smallCursorRef}
         className={`flare ${isPointer ? "pointer" : ""}`}
         style={{
           ...cursorStyle,
@@ -84,9 +89,9 @@ const CustomCursor: React.FC = () => {
           transform: "translate(-50%, -50%)",
           zIndex: 999998,
         }}
-      ></div>
+      />
       <div
-        ref={followerRef}
+        ref={largeCursorRef}
         className={`flare ${isPointer ? "pointer" : ""}`}
         style={{
           left: `${position.x}px`,
@@ -102,7 +107,7 @@ const CustomCursor: React.FC = () => {
           transform: "translate(-50%, -50%)",
           zIndex: 999999,
         }}
-      ></div>
+      />
     </>
   );
 };
