@@ -1,3 +1,5 @@
+@use "../../../sass/variables" as *
+
 @font-face
     font-family: 'Blanka'
     src: url('/fonts/Blanka.otf') format('opentype')
@@ -5,12 +7,12 @@
     font-style: normal
 
 .LogoutButton
-
     &__container
         display: flex
         justify-content: center
         align-items: center
         height: 20vh
+
     &__button
         font-family: 'Blanka', sans-serif
         align-items: center
@@ -48,7 +50,6 @@
         &:active
             outline: 0
             transform: scale(0.9)
-
             span
                 transform: scale(.9)
                 opacity: .75
@@ -59,6 +60,5 @@
         @media screen and (max-width: 991px)
             font-size: 15px
             height: 50px
-
             span
                 line-height: 50px
