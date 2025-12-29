@@ -17,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sulphur_point.className}>
-        <Header />
-        <CustomCursor />
-        {children}
-        <Footer />
+        <div className="app-layout">
+          <Header />
+          <CustomCursor />
+          <main className="app-content">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -1,8 +1,20 @@
 @use "variables"
 
+html, body
+  height: 100%
+
 body
   margin: 0
   padding: 0
   background: variables.$background-color
   color: variables.$text-color
   cursor: none
+
+
+.app-layout
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+
+.app-content
+  flex: 1
