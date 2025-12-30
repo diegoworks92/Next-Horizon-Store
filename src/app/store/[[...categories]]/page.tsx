@@ -1,9 +1,6 @@
 import { ProductsWrapper } from "../../../components/Store/ProductsWrapper";
 import { getProducts } from "../../../services/shopify/products";
-import {
-  getCollectionProducts,
-  getCollections,
-} from "../../../services/shopify/collections";
+import { getCollections } from "../../../services/shopify/collections";
 
 interface CategoryProps {
   params: Promise<{
@@ -14,19 +11,28 @@ interface CategoryProps {
 export default async function Category({ params }: CategoryProps) {
   const { categories } = await params;
 
-  let products = [];
-  const collections = await getCollections();
+  const allProducts = await getProducts();
+  let products = allProducts;
 
   if (categories && categories.length > 0) {
-    const selectedCollection = collections.find(
+    const collections = await getCollections();
+
+    const selectedCollection = collections?.find(
       (collection: any) => collection.handle === categories[0]
     );
 
     if (selectedCollection) {
-      products = await getCollectionProducts(selectedCollection.id);
+      const collectionTag = selectedCollection.title.toLowerCase();
+
+      products = allProducts.filter((product: any) => {
+        const tagsArray = Array.isArray(product.tags)
+          ? product.tags
+          : product.tags?.split(",") || [];
+        return tagsArray.some(
+          (tag: string) => tag.toLowerCase() === collectionTag
+        );
+      });
     }
-  } else {
-    products = await getProducts();
   }
 
   return <ProductsWrapper products={products} />;

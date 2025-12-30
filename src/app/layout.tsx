@@ -1,7 +1,7 @@
 import { Sulphur_Point } from "next/font/google";
 import { Header } from "../components/shared/Header";
 import { Footer } from "../components/shared/Footer";
-import CustomCursor from "../components/CustomCursor/CustomCursor";
+import ClientCursorWrapper from "../components/CustomCursor/ClientCursorWrapper";
 import "../sass/globals.sass";
 
 const sulphur_point = Sulphur_Point({
@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={sulphur_point.className}>
         <div className="app-layout">
           <Header />
-          <CustomCursor />
+          <ClientCursorWrapper />
           <main className="app-content">{children}</main>
           <Footer />
         </div>

@@ -6,6 +6,10 @@ interface ProductsWrapperProps {
 }
 
 export const ProductsWrapper = ({ products }: ProductsWrapperProps) => {
+  if (!products || products.length === 0) {
+    return <p>No products found.</p>;
+  }
+
   return (
     <div className={styles.ProductsWrapper}>
       {products.map((product) => (

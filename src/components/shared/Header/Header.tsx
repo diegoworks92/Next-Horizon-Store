@@ -1,9 +1,7 @@
-"use server";
-
 import Link from "next/link";
-import { validateAccessToken } from "../../../utils/auth/validateAccesToken";
 import HeaderClient from "./HeaderClient";
-import ShoppingCartClient from "../ShoppingCart/ShoppingCartClient"; // Importa la versión client
+import ShoppingCartClient from "../ShoppingCart/ShoppingCartClient";
+import { validateAccessToken } from "../../../utils/auth/validateAccesToken";
 import styles from "./Header.module.sass";
 
 export const Header = async () => {
@@ -21,7 +19,6 @@ export const Header = async () => {
           </li>
         </ul>
       </nav>
-
       <HeaderClient customer={customer} />
       <ShoppingCartClient />
     </header>
