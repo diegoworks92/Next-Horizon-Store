@@ -8,8 +8,8 @@
   mix-blend-mode: screen
   pointer-events: none
   transform: translate(-50%, -50%)
-  cursor: none !important
-  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.3s ease, transform 0.1s ease
+  will-change: transform, opacity
 
 // small cursor
 .small
@@ -29,6 +29,21 @@
   background-color: variables.$magenta-color
   opacity: 1
 
+// hidden
+.hidden
+  opacity: 0
+  transform: translate(-50%, -50%) scale(0.8)
+  pointer-events: none
+
+// hide completely on touch devices
 @media (hover: none) and (pointer: coarse)
   .flare
-    display: none
+    display: none !important
+    opacity: 0 !important
+    visibility: hidden !important
+
+// only show on devices with mouse
+@media (hover: hover) and (pointer: fine)
+  .flare:not(.hidden)
+    display: block
+    opacity: 1

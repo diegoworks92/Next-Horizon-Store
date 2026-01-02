@@ -1,20 +1,30 @@
 @use "variables"
 
-*
-  cursor: none !important
+// apply cursor none only on non-touch devices
+@media (hover: hover) and (pointer: fine)
+  *
+    cursor: none !important
+
+  html, body
+    cursor: none
+
+// on touch devices show normal cursor
+@media (hover: none) and (pointer: coarse)
+  *
+    cursor: auto !important
+
+  .flare
+    display: none !important
 
 html, body
   height: 100%
   overflow-x: hidden
-  cursor: none
 
 body
   margin: 0
   padding: 0
   background: variables.$background-color
   color: variables.$text-color
-  cursor: none
-
 
 .app-layout
   min-height: 100vh
