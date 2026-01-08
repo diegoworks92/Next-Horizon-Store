@@ -25,7 +25,12 @@ export const ShoppingCartItem = ({ item }: ShoppingCartItemProps) => {
         className={styles.ShoppingCartItem__removeButton}
         aria-label="trash"
       >
-        <FaRegTrashCan />
+        {/* <FaRegTrashCan /> */}
+        <img
+          src="/svg/trash.svg"
+          alt="Trash"
+          style={{ width: "20px", marginLeft: "10px" }}
+        />
       </button>
     </div>
   );
