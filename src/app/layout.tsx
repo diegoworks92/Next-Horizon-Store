@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import { Sulphur_Point } from "next/font/google";
 import { Header } from "../components/shared/Header";
 import { Footer } from "../components/shared/Footer";

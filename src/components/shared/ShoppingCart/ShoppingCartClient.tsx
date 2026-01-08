@@ -42,7 +42,12 @@ export default function ShoppingCartClient() {
     <div className={styles.ShoppingCart}>
       <span className={styles.ShoppingCart__counter}>{cart.length}</span>
       <button className={styles.ShoppingCart__cart} onClick={handleOpen}>
-        <FaShoppingCart />
+        {/*         <FaShoppingCart /> */}
+        <img
+          src="/svg/shopping-cart.svg"
+          alt="Shopping Cart"
+          style={{ width: "20px", marginLeft: "10px" }}
+        />
       </button>
       {isOpen && (
         <div className={styles.ShoppingCart__items}>
